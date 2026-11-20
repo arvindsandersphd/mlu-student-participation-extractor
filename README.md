@@ -1,5 +1,7 @@
 # Faculty AI — Class Participation Scoring Lab
 
+> **Also in this repo:** [Psych Rush](psych-quiz/README.md) is a live, Blooket-style quiz game for Intro Psych. Students join from their phones with a code. See `psych-quiz/README.md` for setup.
+
 **Score a day's class participation from a Zoom transcript — grounded in the lesson you actually taught.**
 
 Point this notebook at a Zoom transcript of one class meeting and the material you covered that day. It identifies who spoke, judges what they talked about (on-topic vs. off-topic, grounded *only* in your lesson), and drafts a **0–4 participation score** for each student — with the evidence and reasoning behind every score, for you to review.

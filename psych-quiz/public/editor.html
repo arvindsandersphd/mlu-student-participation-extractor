@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Question Set Editor</title>
+  <meta name="theme-color" content="#6a2cf5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <a class="logo" href="/host">🧠 Psych Rush</a>
+    <span class="pill">Question sets</span>
+    <span class="spacer"></span>
+    <a class="btn tiny white" href="/host">Host a game ▶</a>
+  </div>
+
+  <main class="wrap">
+    <section id="gate" class="hidden">
+      <form class="card narrow" style="margin:40px auto">
+        <h2>Teacher / TA password</h2>
+        <input type="password" autocomplete="current-password" required>
+        <p class="error" role="alert"></p>
+        <button class="btn block" type="submit">Continue</button>
+      </form>
+    </section>
+
+    <!-- List of sets -->
+    <section id="v-list" class="hidden">
+      <div class="card">
+        <div class="row">
+          <h2 style="margin:0">Your question sets</h2>
+          <span class="spacer"></span>
+          <button class="btn green" id="new-btn" type="button">＋ New set</button>
+        </div>
+        <ul class="set-list" id="set-list"></ul>
+      </div>
+      <div class="card">
+        <h3>Import a spreadsheet as a new set</h3>
+        <p class="muted">Works with Excel (.xlsx), Google Sheets (download as .xlsx or .csv), and .csv files.
+          Put one question per row in this column order:</p>
+        <p class="help"><b>Question</b> · <b>Choice A</b> · <b>Choice B</b> · <b>Choice C</b> · <b>Choice D</b> · <b>Correct</b> (A, B, C, or D) · <b>Seconds</b> (optional)<br>
+          A header row is fine. It gets skipped. <a href="/template.csv">Download a template</a> to start from.</p>
+        <div class="row">
+          <input type="file" id="import-new" accept=".xlsx,.csv,.tsv,.txt">
+        </div>
+        <p class="error" id="import-new-error" role="alert"></p>
+      </div>
+    </section>
+
+    <!-- Edit one set -->
+    <section id="v-edit" class="hidden">
+      <div class="card">
+        <div class="row">
+          <button class="btn ghost" id="back-btn" type="button">← All sets</button>
+          <span class="spacer"></span>
+          <span class="small" id="save-status"></span>
+          <button class="btn green" id="save-btn" type="button">💾 Save set</button>
+        </div>
+        <label for="title">Set title</label>
+        <input type="text" id="title" maxlength="120" placeholder="e.g. Chapter 6: Learning">
+        <label for="desc">Short description (optional)</label>
+        <input type="text" id="desc" maxlength="300" placeholder="e.g. Classical and operant conditioning review">
+        <p class="error" id="save-error" role="alert"></p>
+      </div>
+
+      <div class="card">
+        <div class="tabs" role="tablist">
+          <button class="btn ghost active" data-tab="type" type="button">Type questions</button>
+          <button class="btn ghost" data-tab="paste" type="button">Paste from a spreadsheet</button>
+          <button class="btn ghost" data-tab="file" type="button">Import a file</button>
+        </div>
+
+        <div data-panel="paste" class="hidden">
+          <p class="help">In Excel or Google Sheets, select your rows (Question, A, B, C, D, Correct, optional Seconds), copy them, and paste here. You can also type one question per line with commas between parts, like:<br>
+            <code>What is the "father of behaviorism"?,Watson,Freud,Rogers,Maslow,A</code></p>
+          <textarea id="paste-box" placeholder="Paste rows here…"></textarea>
+          <div class="row" style="margin-top:10px">
+            <button class="btn blue" id="paste-btn" type="button">Add these questions</button>
+            <span class="small" id="paste-msg"></span>
+          </div>
+        </div>
+
+        <div data-panel="file" class="hidden">
+          <p class="help">Pick an .xlsx or .csv file. The questions are <b>added to the end</b> of this set. Columns: Question, Choice A, Choice B, Choice C, Choice D, Correct (A–D), Seconds (optional). <a href="/template.csv">Download a template</a>.</p>
+          <input type="file" id="file-input" accept=".xlsx,.csv,.tsv,.txt">
+          <p class="small" id="file-msg"></p>
+        </div>
+
+        <div data-panel="type">
+          <p class="muted small" style="margin-top:0">Click the round button next to the right answer. "Seconds" is optional; leave it blank to use the time you pick when you start the game.</p>
+        </div>
+        <div id="problems" class="help hidden" style="margin-top:12px;background:#fff1f3"></div>
+      </div>
+
+      <div class="card">
+        <div class="row" style="margin-bottom:12px">
+          <h3 style="margin:0" id="q-heading">Questions</h3>
+          <span class="spacer"></span>
+          <button class="btn tiny ghost" id="add-top" type="button">＋ Add question</button>
+        </div>
+        <div id="questions"></div>
+        <div class="row">
+          <button class="btn blue" id="add-btn" type="button">＋ Add question</button>
+          <span class="spacer"></span>
+          <button class="btn green" id="save-btn-2" type="button">💾 Save set</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/editor.js"></script>
+</body>
+</html>

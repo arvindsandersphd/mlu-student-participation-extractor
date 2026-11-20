@@ -1,0 +1,56 @@
+{
+  "title": "Intro Psych Sampler",
+  "description": "A test set covering research methods, biology, learning, memory, development, and social psychology.",
+  "questions": [
+    {
+      "text": "Who opened the first psychology laboratory, in Leipzig, Germany, in 1879?",
+      "choices": ["William James", "Wilhelm Wundt", "Sigmund Freud", "John B. Watson"],
+      "correct": 1
+    },
+    {
+      "text": "A researcher finds that students who sleep more tend to have higher GPAs. What can she conclude?",
+      "choices": ["More sleep causes higher GPAs", "Higher GPAs cause more sleep", "Sleep and GPA are related, but cause is unknown", "There is no relationship"],
+      "correct": 2
+    },
+    {
+      "text": "In an experiment, the variable the researcher manipulates is called the…",
+      "choices": ["Dependent variable", "Confounding variable", "Independent variable", "Control variable"],
+      "correct": 2
+    },
+    {
+      "text": "Which neurotransmitter is most closely linked to reward and pleasure?",
+      "choices": ["Dopamine", "GABA", "Acetylcholine", "Glutamate"],
+      "correct": 0
+    },
+    {
+      "text": "Which lobe of the brain mainly processes vision?",
+      "choices": ["Frontal lobe", "Temporal lobe", "Parietal lobe", "Occipital lobe"],
+      "correct": 3
+    },
+    {
+      "text": "In Pavlov's experiments, the dogs' salivation to the bell (after training) was the…",
+      "choices": ["Unconditioned stimulus", "Conditioned response", "Unconditioned response", "Neutral stimulus"],
+      "correct": 1
+    },
+    {
+      "text": "Taking away an annoying alarm when a seatbelt is buckled, so buckling increases, is an example of…",
+      "choices": ["Positive reinforcement", "Negative reinforcement", "Positive punishment", "Negative punishment"],
+      "correct": 1
+    },
+    {
+      "text": "About how many items can short-term (working) memory hold at once, according to George Miller?",
+      "choices": ["2 ± 1", "7 ± 2", "15 ± 3", "Unlimited"],
+      "correct": 1
+    },
+    {
+      "text": "In Piaget's theory, a child who understands that hidden objects still exist has developed…",
+      "choices": ["Conservation", "Egocentrism", "Object permanence", "Abstract reasoning"],
+      "correct": 2
+    },
+    {
+      "text": "Asch's line-judgment studies are best known for showing the power of…",
+      "choices": ["Obedience to authority", "Conformity to a group", "Cognitive dissonance", "The bystander effect"],
+      "correct": 1
+    }
+  ]
+}

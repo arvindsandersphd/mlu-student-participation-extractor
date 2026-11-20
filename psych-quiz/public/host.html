@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Psych Rush Host</title>
+  <meta name="theme-color" content="#6a2cf5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <a class="logo" href="/host">🧠 Psych Rush</a>
+    <span class="pill" id="top-mode" hidden></span>
+    <span class="spacer"></span>
+    <button class="sound-btn" data-sound type="button">🔊 Sound on</button>
+    <button class="sound-btn" type="button" id="fs-btn" title="Full screen">⛶ Full screen</button>
+  </div>
+
+  <main class="wrap">
+    <!-- Password -->
+    <section id="gate" class="hidden">
+      <form class="card narrow" style="margin:40px auto">
+        <h2>Teacher / TA password</h2>
+        <p class="muted">Ask the instructor for the password that was set for this site.</p>
+        <input type="password" autocomplete="current-password" required>
+        <p class="error" role="alert"></p>
+        <button class="btn block" type="submit">Continue</button>
+      </form>
+    </section>
+
+    <!-- Setup -->
+    <section id="s-setup" class="hidden">
+      <div class="card">
+        <h2>Host a new game</h2>
+        <label for="set-select">Question set</label>
+        <div class="row">
+          <select id="set-select" style="flex:1;min-width:220px"></select>
+          <a class="btn ghost" href="/editor">✏️ Edit / add sets</a>
+        </div>
+        <p class="muted small" id="set-info"></p>
+
+        <label>Game mode</label>
+        <div class="mode-cards" id="modes"></div>
+
+        <div class="settings-grid">
+          <div>
+            <label for="timer">Seconds per question</label>
+            <select id="timer">
+              <option value="10">10 seconds</option>
+              <option value="15">15 seconds</option>
+              <option value="20" selected>20 seconds</option>
+              <option value="30">30 seconds</option>
+              <option value="45">45 seconds</option>
+              <option value="60">60 seconds</option>
+              <option value="90">90 seconds</option>
+            </select>
+            <p class="muted small">Online classes: add 10 seconds or so, because video calls can lag. A time typed on a single question in the editor wins over this.</p>
+          </div>
+          <div>
+            <label for="qcount">How many questions</label>
+            <select id="qcount"><option value="0">All of them</option></select>
+            <label class="check"><input type="checkbox" id="shuffle-q"> Shuffle question order</label>
+            <label class="check"><input type="checkbox" id="shuffle-a"> Shuffle answer order</label>
+          </div>
+        </div>
+        <p class="error" id="setup-error" role="alert"></p>
+        <button class="btn green big" id="create-btn" type="button">Create game ▶</button>
+      </div>
+    </section>
+
+    <!-- Lobby -->
+    <section id="s-lobby" class="hidden">
+      <div class="code-banner">
+        <div>
+          <div class="muted" style="font-weight:600">Students go to</div>
+          <div class="url" id="join-url"></div>
+          <div class="muted small" style="margin-top:6px">…and type this code with a nickname. Paste the link in chat for online classes.</div>
+          <div class="row" style="margin-top:10px"><button class="btn tiny ghost" id="copy-link" type="button">📋 Copy join link</button><span class="small ok" id="copied"></span></div>
+        </div>
+        <div class="center">
+          <div class="muted" style="font-weight:600">Game code</div>
+          <div class="code" id="code"></div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:18px">
+        <span class="pill" id="player-count">0 players</span>
+        <span class="pill" id="lobby-mode"></span>
+        <span class="spacer"></span>
+        <button class="btn red" id="cancel-btn" type="button">Cancel game</button>
+        <button class="btn green big" id="start-btn" type="button" disabled>Start game ▶</button>
+      </div>
+      <p class="white small" id="lobby-blurb"></p>
+      <div class="players" id="players"></div>
+      <p class="white" id="waiting" style="font-size:1.3rem;margin-top:30px;text-align:center">Waiting for players to join…</p>
+    </section>
+
+    <!-- Question -->
+    <section id="s-question" class="hidden">
+      <div class="stage-meta">
+        <span class="pill" id="q-count"></span>
+        <span class="spacer"></span>
+        <span class="pill" id="q-answered"></span>
+        <div class="timer" id="q-timer">20</div>
+      </div>
+      <div class="stage-q" id="q-text"></div>
+      <div class="answers" id="q-answers"></div>
+      <div class="row" style="margin-top:18px">
+        <span class="spacer"></span>
+        <button class="btn white" id="skip-btn" type="button">Stop timer &amp; show answer</button>
+      </div>
+    </section>
+
+    <!-- Reveal + leaderboard -->
+    <section id="s-reveal" class="hidden">
+      <div class="stage-meta">
+        <span class="pill" id="r-count"></span>
+        <span class="spacer"></span>
+        <span class="pill hidden" id="r-boxes"></span>
+      </div>
+      <div class="stage-q" id="r-text" style="font-size:clamp(1.2rem,2.6vw,2rem)"></div>
+      <div class="reveal-grid">
+        <div class="answers" id="r-answers" style="grid-template-columns:1fr;align-content:start"></div>
+        <div>
+          <h2 class="white">🏆 Leaderboard</h2>
+          <ol class="board" id="r-board"></ol>
+        </div>
+      </div>
+      <div class="row" style="margin-top:18px">
+        <button class="btn red" id="end-btn" type="button">End game now</button>
+        <span class="spacer"></span>
+        <button class="btn green big" id="next-btn" type="button">Next question ▶</button>
+      </div>
+    </section>
+
+    <!-- Podium -->
+    <section id="s-podium" class="hidden">
+      <h1 class="brand center">🏆 Final podium 🏆</h1>
+      <div class="podium" id="podium"></div>
+      <div class="card narrow" style="margin:20px auto">
+        <h3>Top 10</h3>
+        <ol class="board" id="final-board"></ol>
+        <p class="muted small">This game is over and all nicknames have been deleted from the server. When you leave this page, they are gone from your screen too.</p>
+        <a class="btn green block" href="/host">Host another game</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/host.js"></script>
+</body>
+</html>

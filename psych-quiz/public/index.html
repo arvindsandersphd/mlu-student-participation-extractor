@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Psych Rush</title>
+  <meta name="theme-color" content="#6a2cf5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <span class="logo">🧠 Psych Rush</span>
+    <span class="spacer"></span>
+    <span id="me" class="pill hidden"></span>
+    <button class="sound-btn" data-sound type="button">🔊 Sound on</button>
+  </div>
+
+  <main class="phone">
+    <!-- Join -->
+    <section id="s-join">
+      <div class="center">
+        <h1 class="brand">Psych Rush</h1>
+        <p class="tagline">Type the game code and pick a nickname. No account needed.</p>
+      </div>
+      <form id="join-form" class="card" autocomplete="off">
+        <label for="code">Game code</label>
+        <input id="code" class="big" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="123456" required>
+        <label for="name">Nickname</label>
+        <input id="name" class="big" type="text" maxlength="20" placeholder="Your nickname" required>
+        <p class="small muted">Please keep it classroom-friendly. Nicknames are deleted when the game ends.</p>
+        <button class="btn green big block" type="submit">Join game</button>
+        <p class="error" id="join-error" role="alert"></p>
+      </form>
+      <p class="footer-links">Teacher or TA? <a href="/host">Host a game</a> · <a href="/editor">Edit question sets</a></p>
+    </section>
+
+    <!-- Lobby -->
+    <section id="s-lobby" class="big-msg hidden">
+      <div class="emoji">🎉</div>
+      <h2>You're in!</h2>
+      <p>Waiting for the host to start…</p>
+      <p class="pill" id="lobby-mode"></p>
+      <p class="small" id="lobby-blurb"></p>
+    </section>
+
+    <!-- Question -->
+    <section id="s-question" class="hidden" style="display:flex;flex-direction:column;flex:1">
+      <div class="phone-bar">
+        <span id="q-count"></span>
+        <span class="mini-timer" id="q-timer">20</span>
+      </div>
+      <div class="phone-q" id="q-text"></div>
+      <div class="answers" id="q-answers"></div>
+    </section>
+
+    <!-- Answer locked -->
+    <section id="s-locked" class="big-msg hidden">
+      <div class="emoji">⏳</div>
+      <h2>Answer locked in!</h2>
+      <p id="locked-choice"></p>
+      <p>Waiting for everyone else…</p>
+    </section>
+
+    <!-- Result -->
+    <section id="s-result" class="hidden" style="display:flex;flex-direction:column;flex:1">
+      <div class="result-card" id="result-card">
+        <div class="emoji" id="r-emoji"></div>
+        <h2 id="r-title"></h2>
+        <div class="gain" id="r-gain"></div>
+        <p id="r-answer"></p>
+        <div class="stats">
+          <span class="stat" id="r-score"></span>
+          <span class="stat" id="r-rank"></span>
+          <span class="stat hidden" id="r-streak"></span>
+        </div>
+      </div>
+      <div id="box-area" class="card hidden" style="margin-top:14px">
+        <h3 class="center" id="box-title">Pick a mystery box!</h3>
+        <div class="boxes" id="boxes"></div>
+        <p class="center" id="box-msg" style="font-weight:700;font-size:1.2rem;min-height:1.4em;margin-bottom:0"></p>
+      </div>
+      <p class="center white" style="margin-top:14px">Watch for the next question…</p>
+    </section>
+
+    <!-- Final -->
+    <section id="s-final" class="big-msg hidden">
+      <div class="emoji" id="f-emoji">🏆</div>
+      <h2 id="f-title">Game over!</h2>
+      <p id="f-detail"></p>
+      <div class="card" style="color:var(--ink);text-align:left;margin-top:12px">
+        <h3>Top 3</h3>
+        <ol class="board" id="f-podium"></ol>
+      </div>
+      <p><button class="btn white" type="button" onclick="location.href='/'">Play again</button></p>
+    </section>
+
+    <!-- Closed / kicked -->
+    <section id="s-closed" class="big-msg hidden">
+      <div class="emoji">👋</div>
+      <h2 id="closed-title">This game has closed</h2>
+      <p id="closed-detail">Thanks for playing!</p>
+      <p><button class="btn white" type="button" onclick="location.href='/'">Join another game</button></p>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/play.js"></script>
+</body>
+</html>
